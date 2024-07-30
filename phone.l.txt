@@ -1,0 +1,23 @@
+%{
+#include <stdio.h>
+%}
+
+%%
+
+[0-9]{3}-[0-9]{3}-[0-9]{4}    { printf("Phone number found: %s\n", yytext); }
+\( [0-9]{3} \)[ ]?[0-9]{3}-[0-9]{4}   { printf("Phone number found: %s\n", yytext); }
+[0-9]{3}\.[0-9]{3}\.[0-9]{4}   { printf("Phone number found: %s\n", yytext); }
+
+.   { /* Ignore other characters */ }
+
+%%
+
+int main(void) {
+    yylex();
+    return 0;
+}
+
+int yywrap(void) {
+    return 1;
+}
+
